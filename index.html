@@ -284,18 +284,19 @@
         </a>
       </div>
 
-      <!-- Instagram grid — replace with real embed or API integration later -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-        <div class="aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
-        <div class="aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
-        <div class="aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
-        <div class="aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
-        <div class="aspect-square rounded-md bg-charcoal border border-border shimmer hidden sm:block"></div>
-        <div class="aspect-square rounded-md bg-charcoal border border-border shimmer hidden sm:block"></div>
-        <div class="aspect-square rounded-md bg-charcoal border border-border shimmer hidden md:block"></div>
-        <div class="aspect-square rounded-md bg-charcoal border border-border shimmer hidden md:block"></div>
+      <!-- Instagram grid — fetched from Cloudflare Worker -->
+      <div id="instagram-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+        <!-- Shimmer placeholders shown while loading -->
+        <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
+        <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
+        <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
+        <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
+        <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer hidden sm:block"></div>
+        <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer hidden sm:block"></div>
+        <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer hidden md:block"></div>
+        <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer hidden md:block"></div>
       </div>
-      <p class="text-center text-stone/50 text-sm mt-6">Instagram feed integration coming soon</p>
+      <p id="instagram-status" class="text-center text-stone/50 text-sm mt-6"></p>
     </div>
   </section>
 
@@ -360,6 +361,78 @@
       <p class="text-center text-stone/30 text-xs mt-8">&copy; 2026 Chris Natterer. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    async function loadInstagramFeed() {
+      const grid = document.getElementById("instagram-grid");
+      const status = document.getElementById("instagram-status");
+
+      try {
+        const res = await fetch("/feed");
+        const data = await res.json();
+
+        if (data.error || !data.posts || data.posts.length === 0) {
+          status.textContent = "Follow me on Instagram for the latest.";
+          return;
+        }
+
+        // Remove placeholders
+        grid.querySelectorAll(".ig-placeholder").forEach((el) => el.remove());
+
+        // Render posts
+        data.posts.forEach((post, i) => {
+          const link = document.createElement("a");
+          link.href = post.url;
+          link.target = "_blank";
+          link.rel = "noopener";
+          link.className = `aspect-square rounded-md overflow-hidden border border-border hover:border-orange/40 transition-all group${i >= 4 && i < 6 ? " hidden sm:block" : ""}${i >= 6 ? " hidden md:block" : ""}`;
+
+          const img = document.createElement("img");
+          img.src = post.image;
+          img.alt = post.caption ? post.caption.substring(0, 100) : "Instagram post";
+          img.loading = "lazy";
+          img.className =
+            "w-full h-full object-cover group-hover:scale-105 transition-transform duration-300";
+
+          // Caption overlay on hover
+          const overlay = document.createElement("div");
+          overlay.className =
+            "absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3";
+          if (post.caption) {
+            const caption = document.createElement("p");
+            caption.className = "text-off-white text-xs line-clamp-3 leading-relaxed";
+            caption.textContent =
+              post.caption.length > 120
+                ? post.caption.substring(0, 120) + "..."
+                : post.caption;
+            overlay.appendChild(caption);
+          }
+
+          link.style.position = "relative";
+          link.appendChild(img);
+          link.appendChild(overlay);
+          grid.appendChild(link);
+        });
+
+        status.textContent = "";
+      } catch (err) {
+        console.error("Instagram feed error:", err);
+        status.textContent = "Follow me on Instagram for the latest.";
+      }
+    }
+
+    // Load feed when section is near viewport (lazy)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadInstagramFeed();
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(document.getElementById("instagram"));
+  </script>
 
 </body>
 </html>
