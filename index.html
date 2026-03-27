@@ -363,52 +363,77 @@
   </footer>
 
   <script>
+    const BEHOLD_FEED = "https://feeds.behold.so/AKZvXyPFYCklcLs4IvBo";
+
     async function loadInstagramFeed() {
       const grid = document.getElementById("instagram-grid");
       const status = document.getElementById("instagram-status");
 
       try {
-        const res = await fetch("/feed");
+        const res = await fetch(BEHOLD_FEED);
         const data = await res.json();
 
-        if (data.error || !data.posts || data.posts.length === 0) {
+        if (!data.posts || data.posts.length === 0) {
           status.textContent = "Follow me on Instagram for the latest.";
           return;
         }
 
-        // Remove placeholders
+        // Remove shimmer placeholders
         grid.querySelectorAll(".ig-placeholder").forEach((el) => el.remove());
 
-        // Render posts
-        data.posts.forEach((post, i) => {
+        // Take up to 8 posts
+        const posts = data.posts.slice(0, 8);
+
+        posts.forEach((post, i) => {
+          // Pick the best image size — medium for grid, fallback to mediaUrl
+          const imgUrl = post.sizes?.medium?.mediaUrl || post.mediaUrl;
+          const thumbUrl = post.thumbnailUrl; // for videos
+
           const link = document.createElement("a");
-          link.href = post.url;
+          link.href = post.permalink;
           link.target = "_blank";
           link.rel = "noopener";
-          link.className = `aspect-square rounded-md overflow-hidden border border-border hover:border-orange/40 transition-all group${i >= 4 && i < 6 ? " hidden sm:block" : ""}${i >= 6 ? " hidden md:block" : ""}`;
+          link.className = [
+            "aspect-square rounded-md overflow-hidden border border-border",
+            "hover:border-orange/40 transition-all group relative",
+            i >= 4 && i < 6 ? "hidden sm:block" : "",
+            i >= 6 ? "hidden md:block" : "",
+          ].filter(Boolean).join(" ");
 
           const img = document.createElement("img");
-          img.src = post.image;
+          img.src = post.mediaType === "VIDEO" && thumbUrl ? thumbUrl : imgUrl;
           img.alt = post.caption ? post.caption.substring(0, 100) : "Instagram post";
           img.loading = "lazy";
-          img.className =
-            "w-full h-full object-cover group-hover:scale-105 transition-transform duration-300";
+          img.className = "w-full h-full object-cover group-hover:scale-105 transition-transform duration-300";
 
           // Caption overlay on hover
           const overlay = document.createElement("div");
-          overlay.className =
-            "absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3";
-          if (post.caption) {
-            const caption = document.createElement("p");
-            caption.className = "text-off-white text-xs line-clamp-3 leading-relaxed";
-            caption.textContent =
-              post.caption.length > 120
-                ? post.caption.substring(0, 120) + "..."
-                : post.caption;
-            overlay.appendChild(caption);
+          overlay.className = "absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3";
+
+          const caption = post.caption || post.prunedCaption || "";
+          if (caption) {
+            const p = document.createElement("p");
+            p.className = "text-off-white text-xs line-clamp-3 leading-relaxed";
+            p.textContent = caption.length > 120 ? caption.substring(0, 120) + "..." : caption;
+            overlay.appendChild(p);
           }
 
-          link.style.position = "relative";
+          // Video play icon
+          if (post.mediaType === "VIDEO") {
+            const play = document.createElement("div");
+            play.className = "absolute top-2 right-2 bg-black/50 rounded-full p-1";
+            play.innerHTML = '<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+            link.appendChild(play);
+          }
+
+          // Carousel indicator
+          if (post.mediaType === "CAROUSEL_ALBUM") {
+            const indicator = document.createElement("div");
+            indicator.className = "absolute top-2 right-2 bg-black/50 rounded-full p-1";
+            indicator.innerHTML = '<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>';
+            link.appendChild(indicator);
+          }
+
           link.appendChild(img);
           link.appendChild(overlay);
           grid.appendChild(link);
@@ -421,7 +446,7 @@
       }
     }
 
-    // Load feed when section is near viewport (lazy)
+    // Lazy-load when Instagram section nears viewport
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
