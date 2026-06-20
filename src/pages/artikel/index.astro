@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const articles = (await getCollection("articles"))
+  .filter((a) => !a.data.draft)
+  .sort((a, b) => +new Date(b.data.publishDate) - +new Date(a.data.publishDate));
+---
+<BaseLayout title="Artikel | Chris Natterer" description="Artikel von Chris Natterer über Investieren, internationales Leben, KI-Tools und Systeme." lang="de">
+  <section class="pt-28 pb-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="font-mono text-orange text-sm tracking-wider uppercase mb-5">Artikel</p>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-off-white leading-[1.1] mb-12">Was ich schreibe</h1>
+
+      {articles.length === 0 ? (
+        <p class="text-stone">Bald mehr hier.</p>
+      ) : (
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {articles.map((a) => (
+            <a href={`/${a.id}`} class="group bg-charcoal border border-border rounded-lg overflow-hidden hover:border-orange/30 transition-all flex flex-col">
+              {a.data.featuredImage && (
+                <img src={a.data.featuredImage} alt={a.data.featuredImageAlt ?? a.data.title} class="w-full aspect-[16/9] object-cover" loading="lazy" />
+              )}
+              <div class="p-6 flex flex-col grow">
+                {a.data.label && <p class="font-mono text-orange text-xs tracking-wider uppercase mb-2">{a.data.label}</p>}
+                <h2 class="text-off-white font-semibold text-lg mb-2 group-hover:text-orange transition-colors">{a.data.title}</h2>
+                <p class="text-stone text-sm leading-relaxed line-clamp-3">{a.data.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

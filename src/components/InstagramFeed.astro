@@ -1,0 +1,121 @@
+---
+// Instagram feed — fetched client-side from Behold.so, ported verbatim from the
+// original static site. The class strings in the script below stay as literals so
+// Tailwind v4 detects and generates them.
+---
+<section id="instagram" class="py-24 border-t border-border">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="flex items-center justify-between mb-12">
+      <div>
+        <h2 class="font-mono text-orange text-sm tracking-wider uppercase mb-4">Instagram</h2>
+        <h3 class="text-2xl sm:text-3xl font-bold text-off-white">Life in pictures</h3>
+      </div>
+      <a href="https://instagram.com/chrisnatterer" target="_blank" rel="noopener" class="text-stone hover:text-orange transition-colors flex items-center gap-2 text-sm">
+        @chrisnatterer
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+      </a>
+    </div>
+
+    <div id="instagram-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+      <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
+      <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
+      <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
+      <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer"></div>
+      <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer hidden sm:block"></div>
+      <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer hidden sm:block"></div>
+      <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer hidden md:block"></div>
+      <div class="ig-placeholder aspect-square rounded-md bg-charcoal border border-border shimmer hidden md:block"></div>
+    </div>
+    <p id="instagram-status" class="text-center text-stone/50 text-sm mt-6"></p>
+  </div>
+</section>
+
+<script is:inline>
+  const BEHOLD_FEED = "https://feeds.behold.so/AKZvXyPFYCklcLs4IvBo";
+
+  async function loadInstagramFeed() {
+    const grid = document.getElementById("instagram-grid");
+    const status = document.getElementById("instagram-status");
+
+    try {
+      const res = await fetch(BEHOLD_FEED);
+      const data = await res.json();
+
+      if (!data.posts || data.posts.length === 0) {
+        status.textContent = "Follow me on Instagram for the latest.";
+        return;
+      }
+
+      grid.querySelectorAll(".ig-placeholder").forEach((el) => el.remove());
+
+      const posts = data.posts.slice(0, 8);
+
+      posts.forEach((post, i) => {
+        const imgUrl = post.sizes?.medium?.mediaUrl || post.mediaUrl;
+        const thumbUrl = post.thumbnailUrl;
+
+        const link = document.createElement("a");
+        link.href = post.permalink;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.className = [
+          "aspect-square rounded-md overflow-hidden border border-border",
+          "hover:border-orange/40 transition-all group relative",
+          i >= 4 && i < 6 ? "hidden sm:block" : "",
+          i >= 6 ? "hidden md:block" : "",
+        ].filter(Boolean).join(" ");
+
+        const img = document.createElement("img");
+        img.src = post.mediaType === "VIDEO" && thumbUrl ? thumbUrl : imgUrl;
+        img.alt = post.caption ? post.caption.substring(0, 100) : "Instagram post";
+        img.loading = "lazy";
+        img.className = "w-full h-full object-cover group-hover:scale-105 transition-transform duration-300";
+
+        const overlay = document.createElement("div");
+        overlay.className = "absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3";
+
+        const caption = post.caption || post.prunedCaption || "";
+        if (caption) {
+          const p = document.createElement("p");
+          p.className = "text-off-white text-xs line-clamp-3 leading-relaxed";
+          p.textContent = caption.length > 120 ? caption.substring(0, 120) + "..." : caption;
+          overlay.appendChild(p);
+        }
+
+        if (post.mediaType === "VIDEO") {
+          const play = document.createElement("div");
+          play.className = "absolute top-2 right-2 bg-black/50 rounded-full p-1";
+          play.innerHTML = '<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+          link.appendChild(play);
+        }
+
+        if (post.mediaType === "CAROUSEL_ALBUM") {
+          const indicator = document.createElement("div");
+          indicator.className = "absolute top-2 right-2 bg-black/50 rounded-full p-1";
+          indicator.innerHTML = '<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>';
+          link.appendChild(indicator);
+        }
+
+        link.appendChild(img);
+        link.appendChild(overlay);
+        grid.appendChild(link);
+      });
+
+      status.textContent = "";
+    } catch (err) {
+      console.error("Instagram feed error:", err);
+      status.textContent = "Follow me on Instagram for the latest.";
+    }
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        loadInstagramFeed();
+        observer.disconnect();
+      }
+    },
+    { rootMargin: "200px" }
+  );
+  observer.observe(document.getElementById("instagram"));
+</script>

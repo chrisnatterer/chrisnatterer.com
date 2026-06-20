@@ -1,2 +1,10 @@
 node_modules
 .DS_Store
+
+# build output
+dist/
+# astro
+.astro/
+# env
+.env
+.env.production

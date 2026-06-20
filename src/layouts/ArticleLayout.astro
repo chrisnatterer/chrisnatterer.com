@@ -1,0 +1,64 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+  label?: string;
+  publishDate: Date;
+  updatedDate?: Date;
+  featuredImage?: string;
+  featuredImageAlt?: string;
+}
+
+const {
+  title,
+  description,
+  lang = "de",
+  label,
+  publishDate,
+  updatedDate,
+  featuredImage,
+  featuredImageAlt,
+} = Astro.props;
+
+const locale = lang === "de" ? "de-DE" : "en-US";
+const fmt = (d: Date) =>
+  new Date(d).toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" });
+---
+<BaseLayout title={`${title} | Chris Natterer`} description={description} lang={lang} ogType="article" ogImage={featuredImage}>
+  <article class="pt-28 pb-24">
+    <div class="max-w-3xl mx-auto px-6">
+      <header class="mb-10">
+        {label && <p class="font-mono text-orange text-sm tracking-wider uppercase mb-5">{label}</p>}
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-off-white leading-[1.12] mb-5">{title}</h1>
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-stone">
+          <span>Chris Natterer</span>
+          <span class="text-stone/40">&bull;</span>
+          <time datetime={new Date(publishDate).toISOString()}>{fmt(publishDate)}</time>
+          {updatedDate && <span class="text-stone/40">&bull;</span>}
+          {updatedDate && <span>aktualisiert {fmt(updatedDate)}</span>}
+        </div>
+      </header>
+
+      {featuredImage && (
+        <img
+          src={featuredImage}
+          alt={featuredImageAlt ?? title}
+          class="w-full rounded-lg border border-border mb-12"
+          width="1376"
+          height="768"
+        />
+      )}
+
+      <div class="article-prose">
+        <slot />
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-border">
+        <a href="/artikel" class="text-orange hover:text-orange-bright transition-colors text-sm font-medium">&larr; Alle Artikel</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

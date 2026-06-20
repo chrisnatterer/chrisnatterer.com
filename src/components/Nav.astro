@@ -1,0 +1,15 @@
+---
+// Site nav. Section links point at the homepage (/#anchor) so they also work
+// from article pages, not just the homepage.
+---
+<nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-border/50">
+  <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="font-mono font-bold text-off-white tracking-wide text-lg">CN</a>
+    <div class="flex items-center gap-6 sm:gap-8">
+      <a href="/#about" class="text-sm text-stone hover:text-off-white transition-colors">About</a>
+      <a href="/artikel" class="text-sm text-stone hover:text-off-white transition-colors">Artikel</a>
+      <a href="/#projects" class="hidden sm:inline text-sm text-stone hover:text-off-white transition-colors">Projects</a>
+      <a href="/#newsletter" class="text-sm text-orange hover:text-orange-bright transition-colors font-medium">Subscribe</a>
+    </div>
+  </div>
+</nav>
