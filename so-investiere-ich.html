@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>So investiere ich: Passives Index-Investing | Chris Natterer</title>
+  <meta name="description" content="Wie ich mein Geld anlege: breite, kostengünstige Index-ETFs, niedrige Cashquote, verteilt über mehrere Broker und Länder. Ehrlich und evidenzbasiert.">
+  <meta property="og:title" content="So investiere ich: Passives Index-Investing">
+  <meta property="og:description" content="Wie ich mein Geld anlege: breite, billige Index-ETFs, niedrige Cashquote, verteilt über mehrere Broker und Länder. Ehrlich und evidenzbasiert.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://chrisnatterer.com/so-investiere-ich">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            black: '#0a0a0a',
+            charcoal: '#171717',
+            border: '#262626',
+            stone: '#a3a3a3',
+            'light-stone': '#d4d4d4',
+            'off-white': '#fafafa',
+            orange: {
+              DEFAULT: '#ea580c',
+              bright: '#f97316',
+              deep: '#c2410c',
+              glow: 'rgba(234, 88, 12, 0.15)',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { background-color: #0a0a0a; }
+
+    /* Smooth fade-in on load */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .fade-in-delay-1 { animation-delay: 0.1s; }
+    .fade-in-delay-2 { animation-delay: 0.2s; }
+    .fade-in-delay-3 { animation-delay: 0.3s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Orange underline accent */
+    .accent-underline {
+      background-image: linear-gradient(#ea580c, #ea580c);
+      background-size: 100% 3px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body class="bg-black text-stone font-sans antialiased">
+
+  <!-- Nav -->
+  <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-border/50">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="font-mono font-bold text-off-white tracking-wide text-lg">CN</a>
+      <div class="flex items-center gap-8">
+        <a href="/" class="text-sm text-stone hover:text-off-white transition-colors">&larr; Zur&uuml;ck zur Startseite</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="pt-32 pb-12">
+    <div class="max-w-3xl mx-auto px-6">
+      <p class="font-mono text-orange text-sm tracking-wider uppercase mb-6 fade-in">Geld / Investieren</p>
+      <h1 class="text-4xl sm:text-5xl font-bold text-off-white leading-[1.1] mb-6 fade-in fade-in-delay-1">
+        So investiere ich:<br>
+        <span class="accent-underline">Passives Index-Investing</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-light-stone leading-relaxed fade-in fade-in-delay-2">
+        Ich werde oft gefragt, wie ich mein Geld anlege. Statt es jedes Mal neu zu erkl&auml;ren, schreibe ich es einmal sauber auf. Breit, billig, dauerhaft investiert, kein Markt-Timing. Hier ist, was ich tue und warum.
+      </p>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="pb-24">
+    <div class="max-w-3xl mx-auto px-6">
+
+      <!-- Vorab -->
+      <div class="bg-charcoal border-l-4 border-orange rounded-r-md p-6 mb-12">
+        <p class="font-mono text-orange text-xs tracking-wider uppercase mb-3">Vorab, einmal klar gesagt</p>
+        <p class="text-light-stone leading-relaxed">
+          Das ist keine Anlageberatung. Ich bin kein Berater, kein Verm&ouml;gensverwalter, und ich verkaufe dir nichts. Ich werde nur oft gefragt, wie ich das mache. Was f&uuml;r mich funktioniert, muss f&uuml;r dich nicht passen. Deine Situation, dein Land, deine Steuerlage, dein Risikoprofil sind anders. Triff deine eigenen Entscheidungen, und wenn es um gro&szlig;e Betr&auml;ge geht, hol dir jemanden, der f&uuml;r deine konkrete Lage haftet. Mit dem aus dem Weg: los geht's.
+        </p>
+      </div>
+
+      <!-- 1. Kurzfassung (TL;DR) -->
+      <h2 class="text-2xl font-bold text-off-white mt-12 mb-4">Die Kurzfassung</h2>
+      <div class="bg-charcoal border-l-4 border-orange rounded-r-md p-6 mb-6">
+        <p class="text-light-stone leading-relaxed">
+          Ich bin seit Jahren ein aggressiver passiver Index-Investor. Fast mein gesamtes liquides Verm&ouml;gen steckt in breit gestreuten, kosteng&uuml;nstigen ETFs, die einfach den ganzen Weltmarkt abbilden. Ich versuche nicht, den Markt zu schlagen, einzelne Aktien zu picken oder den richtigen Zeitpunkt zu finden. Ich kaufe den Markt als Ganzes, halte die Kosten niedrig, lasse Cash nicht rumliegen, und verteile das Ganze &uuml;ber mehrere Broker in mehreren L&auml;ndern, damit ich von keinem einzelnen Anbieter abh&auml;ngig bin.
+        </p>
+      </div>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Das ist es im Kern. Der Rest ist Begr&uuml;ndung und Umsetzung.
+      </p>
+
+      <!-- 2. Warum Index-Fonds -->
+      <h2 class="text-2xl font-bold text-off-white mt-12 mb-4">Warum Index-Fonds, und zwar konkret</h2>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Ich mache das nicht aus Bauchgef&uuml;hl. Ich mache es, weil es eine der am besten belegten Strategien &uuml;berhaupt ist und weil die Logik dahinter sauber aufgeht.
+      </p>
+
+      <h3 class="text-lg font-semibold text-off-white mt-8 mb-3">Die meisten aktiven Fonds schlagen den Index langfristig nicht.</h3>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Das ist keine Meinung, das wird seit Jahren gemessen. Die SPIVA-Studien von S&amp;P zeigen &uuml;ber lange Zeitr&auml;ume immer wieder dasselbe: Die gro&szlig;e Mehrheit der aktiv gemanagten Fonds liegt nach Kosten unter ihrem Vergleichsindex. Und die wenigen, die in einem Zeitraum vorne liegen, sind selten dieselben im n&auml;chsten. Outperformance, die &uuml;brig bleibt, ist schwer von Gl&uuml;ck zu unterscheiden.
+      </p>
+
+      <h3 class="text-lg font-semibold text-off-white mt-8 mb-3">Kosten sind das Einzige, was du sicher kontrollieren kannst.</h3>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Du wei&szlig;t vorher nicht, welcher Fonds gewinnt. Du wei&szlig;t aber genau, was er kostet. Ein breiter Welt-ETF kostet dich heute rund 0,07 bis 0,22 Prozent pro Jahr (Stand 2026, Kosten &auml;ndern sich). Ein aktiver Fonds gern 1,5 Prozent und mehr. &Uuml;ber Jahrzehnte frisst dieser Unterschied einen erschreckend gro&szlig;en Teil deiner Rendite, weil er sich mit dem Zinseszins multipliziert. Jack Bogle hat das auf den Punkt gebracht:
+      </p>
+      <blockquote class="border-l-2 border-orange/60 pl-5 mb-6">
+        <p class="text-off-white text-lg italic leading-relaxed">&bdquo;In investing, you get what you don't pay for.&ldquo;</p>
+        <p class="text-stone text-sm mt-2 font-mono">Jack Bogle</p>
+      </blockquote>
+
+      <h3 class="text-lg font-semibold text-off-white mt-8 mb-3">Die Logik dahinter ist banal und genau deshalb stark.</h3>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Alle Marktteilnehmer zusammen besitzen den ganzen Markt. Im Schnitt k&ouml;nnen sie also nur die Marktrendite erzielen, abz&uuml;glich ihrer Kosten. Wer mehr will, muss zwingend auf Kosten von jemand anderem gewinnen. Das ist ein Nullsummenspiel vor Kosten und ein Negativsummenspiel nach Kosten. Wenn ich einfach den ganzen Markt kaufe und am wenigsten zahle, lande ich systematisch in der oberen H&auml;lfte. Ohne Research, ohne Gl&uuml;ck, ohne Stress.
+      </p>
+
+      <h3 class="text-lg font-semibold text-off-white mt-8 mb-3">Zeit im Markt schl&auml;gt Timing des Marktes.</h3>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Niemand wei&szlig; verl&auml;sslich, wann der n&auml;chste Crash oder die n&auml;chste Rally kommt. Wer auf den perfekten Einstieg wartet, verpasst meistens mehr Rendite, als er an Crash spart. Deshalb warte ich nicht. Geld rein, sobald es da ist.
+      </p>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Das ist die ganze These. Breit, billig, dauerhaft investiert, kein Markt-Timing.
+      </p>
+
+      <!-- 3. Umsetzung -->
+      <h2 class="text-2xl font-bold text-off-white mt-12 mb-4">Wie ich es konkret umsetze</h2>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Hier wird es pers&ouml;nlich, denn das ist der Teil, nach dem die Leute eigentlich fragen.
+      </p>
+
+      <h3 class="text-lg font-semibold text-off-white mt-8 mb-3">Cashquote im niedrigen einstelligen Bereich.</h3>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Bei mir liegt fast nie Geld einfach rum. Was reinkommt und nicht f&uuml;r laufende Kosten gebraucht wird, wandert ziemlich unmittelbar in ETFs. Ich halte einen kleinen Puffer f&uuml;r Notf&auml;lle und Liquidit&auml;t, aber der Rest soll arbeiten, nicht auf dem Konto an Kaufkraft verlieren.
+      </p>
+
+      <h3 class="text-lg font-semibold text-off-white mt-8 mb-3">Mein liquides Verm&ouml;gen steckt fast vollst&auml;ndig in ETFs.</h3>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Ich habe ein Apartment in Georgien, aber das macht inzwischen nur noch einen kleinen Teil meines Verm&ouml;gens aus. Der Gro&szlig;teil dessen, was ich im Alltag verwalte, ist in breit gestreuten Index-Fonds.
+      </p>
+
+      <h3 class="text-lg font-semibold text-off-white mt-8 mb-3">Ich verteile bewusst &uuml;ber mehrere Broker in mehreren L&auml;ndern.</h3>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Das ist der Teil, den ich am wichtigsten finde und der bei den meisten fehlt. Ich nutze unter anderem europ&auml;ische Neobroker wie Trade Republic, Flatex, finanzen.net Zero und Traders Place, dazu Lightyear in UK, einen georgischen Broker und Interactive Brokers. Ich bin damit &uuml;ber verschiedene Jurisdiktionen und viele Anbieter verteilt.
+      </p>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Der Grund ist nicht Rendite, sondern Zugang und Ausfallsicherheit. Wenn bei einem Anbieter mal was klemmt, ein App-Fehler, eine technische St&ouml;rung, ein gesperrter Zugang, eine regulatorische &Auml;nderung, dann macht mir das nichts aus. Ich kann jederzeit auf die anderen ausweichen. Ich bin von keinem einzelnen Anbieter, keiner einzelnen App und keiner einzelnen Jurisdiktion abh&auml;ngig. F&uuml;r jemanden mit international verteiltem Leben ist das kein Luxus, sondern Grundvoraussetzung.
+      </p>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Wichtig: Das Wertpapier-Verm&ouml;gen liegt im Depot rechtlich getrennt vom Broker, der Broker ist nur Verwahrer. Es geht mir hier nicht um Insolvenzschutz im engeren Sinn, sondern um durchgehende Verf&uuml;gbarkeit und Handlungsf&auml;higkeit.
+      </p>
+
+      <!-- 4. Wie ich dahin kam -->
+      <h2 class="text-2xl font-bold text-off-white mt-12 mb-4">Wie ich dahin gekommen bin</h2>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Ich erz&auml;hle das, damit klar ist: ich verkaufe hier keine &Uuml;berflieger-Story, sondern eine, die langsam und unspektakul&auml;r war.
+      </p>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Erste kleine ETF-Schritte habe ich schon um 2005 gemacht, mit Pausen. Damals war ich weder richtig committed noch hatte ich die finanziellen Mittel, um gro&szlig;e Spr&uuml;nge zu machen. Es war eher Tasten als Strategie. Richtig aggressiv investiere ich seit 2021. Seitdem ist es das oben beschriebene System: niedrige Cashquote, alles in breite ETFs, &uuml;ber viele Broker verteilt.
+      </p>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Der ehrliche Punkt daran ist: Das Spannende kam nicht durch geniale Picks, sondern durch Konsequenz &uuml;ber Zeit. Genau das ist auch der Grund, warum die Strategie f&uuml;r so viele Leute funktioniert. Sie verlangt keine besondere Begabung, nur Disziplin und Geduld.
+      </p>
+
+      <!-- 5. Bei null anfangen -->
+      <h2 class="text-2xl font-bold text-off-white mt-12 mb-4">Wenn ich heute bei null anfangen w&uuml;rde</h2>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Wieder: kein Rat, sondern &bdquo;so w&uuml;rde ich es selbst angehen&ldquo;. Ich splitte nach Ausgangslage, weil der Broker-Zugang stark davon abh&auml;ngt, wo du gemeldet bist.
+      </p>
+
+      <h3 class="text-lg font-semibold text-off-white mt-8 mb-3">A) Du lebst in DACH und bist dort gemeldet</h3>
+      <p class="text-light-stone leading-relaxed mb-4">
+        Du hast den einfachsten Zugang. Ein steuereinfacher Broker, ein breiter Welt-ETF als thesaurierende Variante, Sparplan einrichten, fertig. In Deutschland ist die Steuer auf ETFs (Teilfreistellung, Vorabpauschale) sauber automatisiert, wenn der Broker inl&auml;ndisch abf&uuml;hrt.
+      </p>
+      <p class="text-light-stone leading-relaxed mb-3">Beispiele f&uuml;r die Ein-Fonds-L&ouml;sung (TER Stand 2026, &auml;ndert sich):</p>
+      <ul class="list-disc pl-6 mb-4 text-light-stone leading-relaxed space-y-2">
+        <li><span class="text-off-white font-medium">Vanguard FTSE All-World UCITS ETF</span> (Acc: VWCE, rund 0,22 % TER)</li>
+        <li><span class="text-off-white font-medium">Amundi Prime All Country World UCITS ETF</span> (Acc: WEBN, rund 0,07 % TER)</li>
+        <li><span class="text-off-white font-medium">SPDR MSCI ACWI IMI UCITS ETF</span> (inkl. Small Caps, rund 0,17 % TER)</li>
+      </ul>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Alle drei bilden grob &bdquo;die ganze Welt&ldquo; ab. Welcher genau ist zweitrangig. Die Unterschiede sind klein gegen den Effekt, &uuml;berhaupt breit und billig investiert zu sein.
+      </p>
+
+      <h3 class="text-lg font-semibold text-off-white mt-8 mb-3">B) Du hast Deutschland verlassen oder bist abgemeldet</h3>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Hier wird es interessant, und hier machen viele Fehler. Sobald du keinen DACH-Wohnsitz mehr hast, verlierst du oft den Zugang zu deutschen Brokern oder ger&auml;tst in eine Grauzone. Gleichzeitig f&auml;llt die deutsche automatische Steuerabf&uuml;hrung weg, du bist dann im Steuerregime deines neuen Wohnsitzlandes. Mein Ansatz: Broker, die mit nicht-DACH-Wohnsitz sauber funktionieren (zum Beispiel Interactive Brokers, Lightyear, je nach Land lokale Broker), dieselben breiten UCITS-Welt-ETFs, und unbedingt vorher kl&auml;ren, wie ETF-Gewinne in deinem neuen Wohnsitzland besteuert werden. Das ist der Punkt, an dem du jemanden vor Ort brauchst.
+      </p>
+
+      <h3 class="text-lg font-semibold text-off-white mt-8 mb-3">C) Du bist international und hast gar keinen EU-Broker-Zugang</h3>
+      <p class="text-light-stone leading-relaxed mb-4">
+        Wenn UCITS-ETFs f&uuml;r dich nicht erreichbar sind, ist Interactive Brokers oft der gemeinsame Nenner, weil sie in sehr vielen L&auml;ndern Konten er&ouml;ffnen. Dort handelst du dann meist US-domizilierte Welt-ETFs:
+      </p>
+      <ul class="list-disc pl-6 mb-4 text-light-stone leading-relaxed space-y-2">
+        <li><span class="text-off-white font-medium">Vanguard Total World Stock ETF</span> (VT, rund 0,06 % TER) als Ein-Fonds-Welt-L&ouml;sung</li>
+        <li>oder die Kombi <span class="text-off-white font-medium">VTI</span> (US-Gesamtmarkt) plus <span class="text-off-white font-medium">VXUS</span> (Rest der Welt)</li>
+      </ul>
+      <p class="text-light-stone leading-relaxed mb-6">
+        Achtung: US-domizilierte Fonds haben f&uuml;r Nicht-US-Personen eigene Steuerthemen (US-Quellensteuer auf Dividenden, US-Erbschaftsteuer-Exposure ab gewissen Schwellen). Je nach Pass und Wohnsitz kann das relevant sein. Auch hier: vorher pr&uuml;fen.
+      </p>
+
+      <h3 class="text-lg font-semibold text-off-white mt-8 mb-3">Der gemeinsame Nenner &uuml;ber alle drei</h3>
+      <ul class="list-disc pl-6 mb-6 text-light-stone leading-relaxed space-y-2">
+        <li>Ein oder zwei breite, billige Welt-ETFs reichen. Kein Bedarf f&uuml;r zehn Positionen.</li>
+        <li>Thesaurierend, wenn du in der Ansparphase bist und die Wiederanlage nicht selbst machen willst.</li>
+        <li>Sparplan oder regelm&auml;&szlig;iges manuelles Kaufen, statt auf den perfekten Moment zu warten.</li>
+        <li>Mehr als einen Broker, sobald die Summen gr&ouml;&szlig;er werden.</li>
+      </ul>
+
+      <!-- 6. Was ich NICHT mache -->
+      <h2 class="text-2xl font-bold text-off-white mt-12 mb-4">Was ich bewusst nicht mache</h2>
+      <ul class="list-disc pl-6 mb-6 text-light-stone leading-relaxed space-y-3">
+        <li><span class="text-off-white font-medium">Keine Einzelaktien als Kern.</span> Falls &uuml;berhaupt, dann als kleine Spielwiese, klar getrennt vom Kern. Der Kern ist langweilig und soll es bleiben.</li>
+        <li><span class="text-off-white font-medium">Kein Stockpicking, kein Market-Timing.</span> Ich glaube nicht, dass ich es dauerhaft besser kann als der Markt, und die Daten geben mir recht.</li>
+        <li><span class="text-off-white font-medium">Keine Krypto-Wetten im Kernportfolio.</span> Wer das will, soll es bewusst und in kleiner Dosis machen, nicht als Ersatz f&uuml;r den breiten Markt.</li>
+        <li><span class="text-off-white font-medium">Keine teuren aktiven Fonds und keine Berater, die an Provisionen verdienen.</span> Das frisst genau die Rendite, die der Index-Ansatz dir spart.</li>
+        <li><span class="text-off-white font-medium">Der Trade-off, den ich akzeptiere:</span> Ich werde nie der sein, der &bdquo;200 Prozent mit der einen Aktie&ldquo; gemacht hat. Daf&uuml;r habe ich auch nie den Totalausfall, die schlaflosen N&auml;chte und den Zeitaufwand. F&uuml;r mich ist das ein guter Tausch. F&uuml;r jemand anderen vielleicht nicht. Das ist individuell.</li>
+      </ul>
+
+      <p class="text-light-stone leading-relaxed mb-6">
+        Und zum Schluss die ehrlichste Zeile: Es gibt Leute, die mehr wissen als ich. Das hier ist kein Geheimwissen und kein Trick. Es ist eine simple, gut belegte Strategie, konsequent durchgezogen. Genau das ist der Punkt.
+      </p>
+
+      <!-- Disclaimer -->
+      <div class="border border-border rounded-md p-6 mt-12">
+        <p class="font-mono text-stone text-xs tracking-wider uppercase mb-3">Disclaimer</p>
+        <p class="text-stone text-sm leading-relaxed">
+          Dieser Text beschreibt meine pers&ouml;nlichen Erfahrungen und Entscheidungen. Er ist keine Anlage-, Steuer- oder Rechtsberatung und keine Empfehlung, bestimmte Produkte zu kaufen oder zu verkaufen. Investments bergen Risiken bis zum Totalverlust. Vergangene Wertentwicklung ist kein Indikator f&uuml;r die Zukunft. Genannte Fonds und Anbieter sind Beispiele, keine Empfehlungen, und ihre Kosten und Verf&uuml;gbarkeit &auml;ndern sich. Triff deine eigenen Entscheidungen und zieh f&uuml;r deine konkrete Situation qualifizierte Beratung hinzu.
+        </p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- Footer -->
+  <footer class="border-t border-border py-12">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <a href="/" class="text-sm text-orange hover:text-orange-bright transition-colors">&larr; Zur&uuml;ck zur Startseite</a>
+        <p class="text-stone/40 text-xs">&copy; 2026 Chris Natterer</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
