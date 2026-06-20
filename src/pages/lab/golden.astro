@@ -1,0 +1,440 @@
+---
+// DESIGN STUDY — dark/gold luxury landing page.
+// Rebuilds the visual language of a reference funnel page (dark #050505 + gold
+// #E8C468, high-contrast serif display, glow cards, gold shimmer CTA) with clean
+// placeholder copy. Self-contained: own <html>, own fonts, own theme tokens, so it
+// does not touch the site's orange brand theme. Tailwind utilities via global.css.
+import "../../styles/global.css";
+
+const features = [
+  { t: "Curated, not collected", d: "Every entry is something I actually use and would defend in a room full of skeptics." },
+  { t: "Built from real work", d: "No theory shelf. The playbook is the residue of decisions that already paid off." },
+  { t: "One place, end to end", d: "Setup, tools, sequencing and the gotchas, organized so you act instead of research." },
+  { t: "No filler, no upsell maze", d: "Straight to the substance. You either get value on page one or you do not." },
+];
+
+const without = [
+  "Scattered tabs and half-finished notes",
+  "Advice that contradicts itself",
+  "Months lost to trial and error",
+  "Decisions made without seeing the trade-off",
+  "Tools chosen by ads, not by fit",
+];
+const withIt = [
+  "One ordered map of what actually works",
+  "Reasoning behind every call, not just the call",
+  "The shortcut past the expensive mistakes",
+  "Trade-offs named before you commit",
+  "The exact stack, vetted by real use",
+];
+
+const steps = [
+  { n: "1", t: "Open the playbook", d: "Instant access to the full library. Yours to keep, updated as things change." },
+  { n: "2", t: "Find your move", d: "Each chapter is a decision: what it is, when it applies, and how to execute." },
+  { n: "3", t: "Act the same day", d: "Clear next steps, not inspiration. Most people ship something within a day." },
+];
+
+const quotes = [
+  { q: "The sequencing chapter alone saved me a quarter of pointless work.", n: "Placeholder Name", c: "Operator" },
+  { q: "I stopped second-guessing the stack. It is all reasoned out.", n: "Placeholder Name", c: "Founder" },
+  { q: "Read it on a Sunday, changed two decisions by Monday.", n: "Placeholder Name", c: "Builder" },
+];
+
+const faqs = [
+  { q: "What exactly do I get?", a: "Full access to the playbook library and every future update. One link, yours forever." },
+  { q: "Is this just a list of links?", a: "No. It is the reasoning, the sequencing, and the trade-offs around each choice. The why, not just the what." },
+  { q: "Is it for beginners?", a: "It assumes you are serious and ready to act. It does not assume you already know the terrain." },
+  { q: "What is the guarantee?", a: "If it does not earn its keep in the first read, reply and get your money back. No forms." },
+];
+---
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth golden-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Private Playbook — Design Study</title>
+  <meta name="description" content="Design study: a dark, gold, high-contrast luxury landing page rebuilt with clean placeholder content." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;0,900;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="golden">
+  <!-- top strip -->
+  <div class="g-strip">For people who already move fast &middot; Lifetime access &middot; Instant delivery</div>
+
+  <!-- HERO -->
+  <header class="g-wrap pt-20 pb-10 text-center">
+    <div class="g-author reveal">
+      <div class="g-avatar" aria-hidden="true">CN</div>
+      <div class="text-left leading-tight">
+        <p class="text-[#FAFAFA] font-semibold text-sm">Chris Natterer</p>
+        <p class="text-[#BB9E54] text-xs">Systems, written down</p>
+      </div>
+    </div>
+
+    <p class="g-eyebrow reveal" style="--d:.05s">The work most people keep to themselves</p>
+    <h1 class="g-display reveal" style="--d:.1s">
+      The shortcut I wish<br /><span class="g-gold-text">someone had handed me.</span>
+    </h1>
+    <p class="g-lead reveal" style="--d:.18s">
+      I spent years finding what actually works, the expensive way. This is the ordered version:
+      the tools, the sequencing, and the trade-offs, with the dead ends already removed.
+    </p>
+
+    <div class="reveal" style="--d:.26s">
+      <a href="#pricing" class="g-cta">Open the playbook <span aria-hidden="true">&rarr;</span></a>
+      <p class="g-microcopy">Instant access &middot; Lifetime updates &middot; 30-day guarantee</p>
+    </div>
+
+    <!-- hero split: mockup + service-style list -->
+    <div class="g-hero-split reveal" style="--d:.34s">
+      <div class="g-mockup" aria-hidden="true">
+        <div class="g-mockup-glow"></div>
+        <p class="g-mockup-kicker">The Private Playbook</p>
+        <div class="g-mockup-keyline"></div>
+        <ul class="g-mockup-list">
+          <li><span></span> Setup, end to end</li>
+          <li><span></span> The exact stack</li>
+          <li><span></span> Sequencing &amp; timing</li>
+          <li><span></span> The costly mistakes</li>
+          <li><span></span> Decision trade-offs</li>
+        </ul>
+        <div class="g-mockup-seal">∞</div>
+      </div>
+
+      <div class="g-panel text-left">
+        <h2 class="g-panel-title">If you are serious about this and still pass, that is on you.</h2>
+        <p class="g-panel-sub">The right map changes the game. I built mine the slow way. You get the shortcut.</p>
+        <p class="g-tag-label">Inside the playbook</p>
+        <div class="g-list">
+          {features.map((f) => (
+            <div class="g-list-row">
+              <div class="g-list-dot"></div>
+              <div>
+                <p class="text-[#FAFAFA] font-semibold text-sm">{f.t}</p>
+                <p class="text-[#9a917c] text-xs leading-relaxed">{f.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- QUOTE BREAK -->
+  <section class="g-wrap py-24 text-center">
+    <p class="g-quote-mark" aria-hidden="true">&ldquo;</p>
+    <p class="g-display text-3xl md:text-5xl">
+      Past a certain point, it is all <span class="g-gold-text">judgment.</span>
+    </p>
+    <div class="g-rule"></div>
+    <p class="g-lead">It comes down to knowing what to do and in what order. I spent years on that. Now you start from mine.</p>
+  </section>
+
+  <!-- FEATURE GRID -->
+  <section class="g-wrap py-16">
+    <div class="text-center mb-14">
+      <p class="g-pill">★ What you really get</p>
+      <h2 class="g-display text-4xl md:text-5xl mt-6">You are buying clarity,<br />not another bookmark folder.</h2>
+      <p class="g-lead">A title means nothing if you cannot act on it. The value is the order, the reasoning, and the trade-offs.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-5">
+      {features.map((f) => (
+        <div class="g-card text-center">
+          <div class="g-check">✓</div>
+          <h3 class="text-[#FAFAFA] font-semibold text-lg mb-2">{f.t}</h3>
+          <p class="text-[#9a917c] text-sm leading-relaxed">{f.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="g-wrap py-16">
+    <div class="text-center mb-14">
+      <h2 class="g-display text-4xl md:text-5xl">This is what separates stuck<br />from scaling.</h2>
+      <p class="g-lead">What moves the needle is not more information. It is the right map and the order of moves.</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="g-compare g-compare-dim">
+        <p class="g-tag-label-red">Without it</p>
+        <ul>
+          {without.map((x) => <li><span class="g-x">✕</span> {x}</li>)}
+        </ul>
+      </div>
+      <div class="g-compare g-compare-gold">
+        <p class="g-tag-label">With the playbook</p>
+        <ul>
+          {withIt.map((x) => <li><span class="g-tick">✓</span> {x}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="g-wrap py-16">
+    <div class="text-center mb-14">
+      <p class="g-pill">How it works</p>
+      <h2 class="g-display text-4xl md:text-5xl mt-6">Three steps. Same day.</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      {steps.map((s) => (
+        <div class="g-card">
+          <div class="g-step-n">{s.n}</div>
+          <h3 class="text-[#FAFAFA] font-semibold text-lg mb-2">{s.t}</h3>
+          <p class="text-[#9a917c] text-sm leading-relaxed">{s.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="g-wrap py-20">
+    <div class="g-price">
+      <div class="g-price-glow"></div>
+      <p class="g-pill">Only the substance</p>
+      <div class="g-price-amount">
+        <span class="g-price-strike">Priceless</span>
+        <span class="g-price-num">$37</span>
+        <span class="g-price-unit">one-time</span>
+      </div>
+      <p class="text-[#9a917c] text-sm mb-8 max-w-md mx-auto">Lifetime access to the full playbook and every future update. One payment, no subscription, no upsell maze.</p>
+      <a href="#" class="g-cta g-cta-lg">Open the playbook <span aria-hidden="true">&rarr;</span></a>
+      <p class="g-microcopy">Secure checkout &middot; Instant access &middot; 30-day guarantee</p>
+      <div class="g-pay">VISA &middot; Mastercard &middot; Amex &middot; PayPal</div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="g-wrap py-16">
+    <div class="text-center mb-14">
+      <p class="g-pill">4.9 from a lot of operators</p>
+      <h2 class="g-display text-4xl md:text-5xl mt-6">What people say.</h2>
+      <p class="text-[#6f6a5c] text-xs mt-3">Placeholder testimonials for this design study.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      {quotes.map((q) => (
+        <div class="g-card">
+          <p class="text-[#E8C468] text-lg mb-3" aria-hidden="true">★★★★★</p>
+          <p class="text-[#e6e2d6] leading-relaxed mb-5">&ldquo;{q.q}&rdquo;</p>
+          <p class="text-[#FAFAFA] font-semibold text-sm">{q.n}</p>
+          <p class="text-[#9a917c] text-xs">{q.c}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="g-wrap py-16 max-w-3xl">
+    <div class="text-center mb-12">
+      <p class="g-pill">Before you buy</p>
+      <h2 class="g-display text-4xl md:text-5xl mt-6">Questions.</h2>
+    </div>
+    <div class="space-y-3">
+      {faqs.map((f) => (
+        <details class="g-faq">
+          <summary>{f.q}<span class="g-faq-plus" aria-hidden="true">+</span></summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="g-wrap py-24 text-center">
+    <h2 class="g-display text-4xl md:text-6xl">Start from what<br /><span class="g-gold-text">already works.</span></h2>
+    <p class="g-lead">The whole playbook in one access, plus every update as things change.</p>
+    <a href="#" class="g-cta g-cta-lg">Open the playbook <span aria-hidden="true">&rarr;</span></a>
+    <p class="g-microcopy">One-time payment &middot; 30-day guarantee</p>
+  </section>
+
+  <footer class="g-footer">
+    <p class="g-display text-2xl">The Private Playbook</p>
+    <p class="text-[#6f6a5c] text-xs mt-3 max-w-xl mx-auto">Design study rebuilding a dark/gold luxury landing layout. Placeholder copy, no real product, no claims. Not affiliated with any brand.</p>
+    <p class="text-[#5b5749] text-xs mt-4">&copy; 2026 Chris Natterer &middot; <a href="/" class="text-[#BB9E54] hover:text-[#E8C468]">chrisnatterer.com</a></p>
+  </footer>
+
+  <style is:global>
+    .golden {
+      --gold: #E8C468;
+      --gold-deep: #BB9E54;
+      --gold-dark: #493E23;
+      --bg: #050505;
+      --panel: #0b0a07;
+      --panel-2: #100e0a;
+      --text: #FAFAFA;
+      --muted: #9a917c;
+      --border: #25211733;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    /* atmospheric gold glow at the top */
+    .golden::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(60% 40% at 50% -5%, rgba(232,196,104,.16), transparent 60%),
+        radial-gradient(40% 30% at 80% 10%, rgba(232,196,104,.06), transparent 60%);
+    }
+    .golden > * { position: relative; z-index: 1; }
+
+    .g-wrap { max-width: 64rem; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .g-wrap.max-w-3xl { max-width: 48rem; }
+
+    .g-strip {
+      text-align: center; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold-deep); padding: .7rem 1rem; border-bottom: 1px solid var(--gold-dark);
+      background: #0a0906;
+    }
+
+    .g-display {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800; color: var(--text); line-height: 1.05; letter-spacing: -0.01em;
+      font-size: clamp(2.6rem, 6vw, 4.6rem); margin: 0 auto 1.25rem; max-width: 18ch;
+    }
+    .g-gold-text {
+      background: linear-gradient(180deg, #f6dd92, var(--gold) 55%, #b98f3c);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .g-eyebrow {
+      font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold-deep); margin: 1.6rem 0 1rem;
+    }
+    .g-lead { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 42rem; margin: 0 auto 2rem; }
+
+    .g-author { display: inline-flex; align-items: center; gap: .6rem; }
+    .g-avatar {
+      width: 2.25rem; height: 2.25rem; border-radius: 999px; display: grid; place-items: center;
+      font-family: 'Playfair Display', serif; font-weight: 700; font-size: .8rem; color: #0a0906;
+      background: linear-gradient(180deg, #f6dd92, var(--gold)); border: 1px solid #f3d98e;
+    }
+
+    /* buttons */
+    .g-cta {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-weight: 700; font-size: .98rem; color: #1a1304;
+      padding: .95rem 1.8rem; border-radius: 7px;
+      background: linear-gradient(180deg, #f7e09b 0%, var(--gold) 45%, #cda23f 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 -2px 6px rgba(120,80,0,.35), 0 10px 34px -8px rgba(212,175,55,.6);
+      position: relative; overflow: hidden; transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .g-cta:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 14px 40px -8px rgba(212,175,55,.75); }
+    .g-cta::after {
+      content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent);
+      transform: skewX(-20deg); animation: g-shimmer 3.4s ease-in-out infinite;
+    }
+    @keyframes g-shimmer { 0%,60% { left: -120%; } 100% { left: 160%; } }
+    .g-cta-lg { padding: 1.15rem 2.4rem; font-size: 1.05rem; }
+    .g-microcopy { color: #6f6a5c; font-size: .78rem; margin-top: .9rem; }
+
+    /* hero split */
+    .g-hero-split { display: grid; gap: 1.25rem; margin-top: 3.5rem; text-align: left; }
+    @media (min-width: 860px) { .g-hero-split { grid-template-columns: 1fr 1fr; align-items: stretch; } }
+
+    .g-mockup {
+      position: relative; border-radius: 16px; padding: 2rem 1.75rem; min-height: 340px;
+      background: radial-gradient(120% 120% at 30% 0%, #1a160d, #0a0906 70%);
+      border: 1px solid var(--gold-dark); overflow: hidden;
+    }
+    .g-mockup-glow { position: absolute; inset: -40% 30% auto -10%; height: 60%; background: radial-gradient(closest-side, rgba(232,196,104,.22), transparent); }
+    .g-mockup-kicker { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); position: relative; }
+    .g-mockup-keyline { height: 1px; width: 64px; background: linear-gradient(90deg, var(--gold), transparent); margin: .9rem 0 1.4rem; }
+    .g-mockup-list { display: grid; gap: .85rem; position: relative; }
+    .g-mockup-list li { display: flex; align-items: center; gap: .7rem; color: #d8d2c2; font-size: .92rem; }
+    .g-mockup-list li span { width: 7px; height: 7px; border-radius: 999px; background: var(--gold); box-shadow: 0 0 10px rgba(232,196,104,.8); }
+    .g-mockup-seal {
+      position: absolute; right: 1.4rem; bottom: 1.1rem; width: 2.6rem; height: 2.6rem; border-radius: 999px;
+      display: grid; place-items: center; color: var(--gold); border: 1px solid var(--gold-dark); font-size: 1.1rem;
+    }
+
+    .g-panel {
+      border-radius: 16px; padding: 1.9rem 1.6rem;
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--border); box-shadow: 0 0 60px -30px rgba(232,196,104,.5);
+    }
+    .g-panel-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.5rem; line-height: 1.2; color: var(--text); margin-bottom: .6rem; }
+    .g-panel-sub { color: var(--muted); font-size: .9rem; line-height: 1.6; margin-bottom: 1.5rem; }
+
+    .g-tag-label, .g-tag-label-red {
+      display: inline-block; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase;
+      padding: .3rem .7rem; border-radius: 999px; margin-bottom: 1rem;
+    }
+    .g-tag-label { color: var(--gold); border: 1px solid var(--gold-dark); background: #161106; }
+    .g-tag-label-red { color: #d98a8a; border: 1px solid #4a2222; background: #160a0a; }
+
+    .g-list { display: grid; gap: .9rem; }
+    .g-list-row { display: flex; gap: .75rem; align-items: flex-start; padding-bottom: .9rem; border-bottom: 1px solid #ffffff0a; }
+    .g-list-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .g-list-dot { margin-top: .35rem; width: 8px; height: 8px; flex: 0 0 auto; border-radius: 999px; background: var(--gold); box-shadow: 0 0 10px rgba(232,196,104,.7); }
+
+    /* cards */
+    .g-card {
+      border-radius: 14px; padding: 1.6rem 1.4rem;
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--border); transition: border-color .2s ease, transform .2s ease;
+    }
+    .g-card:hover { border-color: #574a2a; transform: translateY(-2px); }
+    .g-check {
+      width: 2.2rem; height: 2.2rem; margin: 0 auto 1rem; border-radius: 999px; display: grid; place-items: center;
+      color: var(--gold); border: 1px solid var(--gold-dark); background: #161106; font-size: 1rem;
+    }
+    .g-step-n {
+      font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: .5rem;
+    }
+
+    /* comparison */
+    .g-compare { border-radius: 16px; padding: 1.8rem 1.6rem; border: 1px solid var(--border); }
+    .g-compare-dim { background: #0c0b09; }
+    .g-compare-gold { background: linear-gradient(180deg, #14110a, #0b0a07); box-shadow: 0 0 70px -30px rgba(232,196,104,.55); border-color: #3a3119; }
+    .g-compare ul { display: grid; gap: .95rem; }
+    .g-compare li { display: flex; gap: .7rem; align-items: flex-start; color: #cfc9ba; font-size: .95rem; line-height: 1.4; }
+    .g-x { color: #c95b5b; font-weight: 700; }
+    .g-tick { color: var(--gold); font-weight: 700; }
+
+    /* pricing */
+    .g-price {
+      position: relative; text-align: center; border-radius: 22px; padding: 3rem 1.5rem 2.6rem;
+      background: radial-gradient(120% 120% at 50% 0%, #16120a, #08070500 70%), #0a0906;
+      border: 1px solid #3a3119; overflow: hidden;
+    }
+    .g-price-glow { position: absolute; inset: -50% 20% auto 20%; height: 70%; background: radial-gradient(closest-side, rgba(232,196,104,.18), transparent); }
+    .g-price-amount { display: flex; align-items: baseline; justify-content: center; gap: .6rem; margin: 1.3rem 0 1rem; position: relative; }
+    .g-price-strike { font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold-deep); font-size: 1.3rem; text-decoration: line-through; opacity: .8; }
+    .g-price-num { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 3.4rem; color: var(--text); }
+    .g-price-unit { color: var(--muted); font-size: .9rem; }
+    .g-pay { color: #6f6a5c; font-size: .72rem; letter-spacing: .1em; margin-top: 1.1rem; }
+
+    /* faq */
+    .g-faq { border: 1px solid var(--border); border-radius: 12px; background: #0b0a07; overflow: hidden; }
+    .g-faq summary {
+      list-style: none; cursor: pointer; padding: 1.1rem 1.3rem; display: flex; align-items: center; justify-content: space-between;
+      color: var(--text); font-weight: 600; font-size: 1rem;
+    }
+    .g-faq summary::-webkit-details-marker { display: none; }
+    .g-faq-plus { color: var(--gold); font-size: 1.3rem; transition: transform .2s ease; }
+    .g-faq[open] .g-faq-plus { transform: rotate(45deg); }
+    .g-faq p { padding: 0 1.3rem 1.2rem; color: var(--muted); font-size: .92rem; line-height: 1.6; }
+
+    .g-quote-mark { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--gold-dark); line-height: 0; height: 2rem; }
+    .g-rule { height: 1px; width: 90px; margin: 1.5rem auto; background: linear-gradient(90deg, transparent, var(--gold-dark), transparent); }
+
+    .g-pill {
+      display: inline-block; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--gold); padding: .4rem .9rem; border-radius: 999px; border: 1px solid var(--gold-dark); background: #161106;
+    }
+
+    .g-footer { text-align: center; padding: 4rem 1.5rem 5rem; border-top: 1px solid var(--gold-dark); margin-top: 2rem; }
+
+    /* load reveal */
+    .reveal { opacity: 0; transform: translateY(16px); animation: g-rise .7s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: var(--d, 0s); }
+    @keyframes g-rise { to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .reveal { animation: none; opacity: 1; transform: none; } .g-cta::after { animation: none; } }
+  </style>
+</body>
+</html>
