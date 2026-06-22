@@ -4,12 +4,13 @@ import BaseLayout from "./BaseLayout.astro";
 interface Props {
   title: string;
   description?: string;
-  lang?: string;
+  lang?: "en" | "de";
   label?: string;
   publishDate: Date;
   updatedDate?: Date;
   featuredImage?: string;
   featuredImageAlt?: string;
+  altUrl?: string;
 }
 
 const {
@@ -21,13 +22,20 @@ const {
   updatedDate,
   featuredImage,
   featuredImageAlt,
+  altUrl,
 } = Astro.props;
 
-const locale = lang === "de" ? "de-DE" : "en-US";
+const de = lang === "de";
+const locale = de ? "de-DE" : "en-US";
 const fmt = (d: Date) =>
   new Date(d).toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" });
+const t = {
+  updated: de ? "aktualisiert" : "updated",
+  allArticles: de ? "Alle Artikel" : "All articles",
+};
+const listingHref = de ? "/de/artikel" : "/artikel";
 ---
-<BaseLayout title={`${title} | Chris Natterer`} description={description} lang={lang} ogType="article" ogImage={featuredImage}>
+<BaseLayout title={`${title} | Chris Natterer`} description={description} lang={lang} ogType="article" ogImage={featuredImage} altUrl={altUrl}>
   <article class="pt-28 pb-24">
     <div class="max-w-3xl mx-auto px-6">
       <header class="mb-10">
@@ -38,7 +46,7 @@ const fmt = (d: Date) =>
           <span class="text-stone/40">&bull;</span>
           <time datetime={new Date(publishDate).toISOString()}>{fmt(publishDate)}</time>
           {updatedDate && <span class="text-stone/40">&bull;</span>}
-          {updatedDate && <span>aktualisiert {fmt(updatedDate)}</span>}
+          {updatedDate && <span>{t.updated} {fmt(updatedDate)}</span>}
         </div>
       </header>
 
@@ -57,7 +65,7 @@ const fmt = (d: Date) =>
       </div>
 
       <div class="mt-16 pt-8 border-t border-border">
-        <a href="/artikel" class="text-orange hover:text-orange-bright transition-colors text-sm font-medium">&larr; Alle Artikel</a>
+        <a href={listingHref} class="text-orange hover:text-orange-bright transition-colors text-sm font-medium">&larr; {t.allArticles}</a>
       </div>
     </div>
   </article>

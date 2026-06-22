@@ -11,6 +11,8 @@ const articles = defineCollection({
     lang: z.enum(["de", "en"]).default("de"),
     series: z.string().optional(),
     label: z.string().optional(),
+    /** URL of this article in the other language (enables switcher + hreflang). */
+    altUrl: z.string().optional(),
     featuredImage: z.string().optional(),
     featuredImageAlt: z.string().optional(),
     tags: z.array(z.string()).default([]),
