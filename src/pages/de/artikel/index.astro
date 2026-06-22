@@ -1,19 +1,19 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 const articles = (await getCollection("articles"))
-  .filter((a) => !a.data.draft && a.data.lang !== "de")
+  .filter((a) => !a.data.draft && a.data.lang === "de")
   .sort((a, b) => +new Date(b.data.publishDate) - +new Date(a.data.publishDate));
 ---
-<BaseLayout title="Articles | Chris Natterer" description="Articles by Chris Natterer on investing, international life, AI tools, and systems." lang="en" altUrl="/de/artikel">
+<BaseLayout title="Artikel | Chris Natterer" description="Artikel von Chris Natterer über Investieren, internationales Leben, KI-Tools und Systeme." lang="de" altUrl="/artikel">
   <section class="pt-28 pb-24">
     <div class="max-w-5xl mx-auto px-6">
-      <p class="font-mono text-orange text-sm tracking-wider uppercase mb-5">Writing</p>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-off-white leading-[1.1] mb-12">What I write about</h1>
+      <p class="font-mono text-orange text-sm tracking-wider uppercase mb-5">Artikel</p>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-off-white leading-[1.1] mb-12">Was ich schreibe</h1>
 
       {articles.length === 0 ? (
-        <p class="text-stone">More here soon. In the meantime, read <a href="/de/artikel" class="text-orange hover:text-orange-bright">the German articles</a>.</p>
+        <p class="text-stone">Bald mehr hier.</p>
       ) : (
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {articles.map((a) => (

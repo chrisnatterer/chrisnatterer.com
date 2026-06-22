@@ -1,39 +1,44 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import InstagramFeed from "../components/InstagramFeed.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import InstagramFeed from "../../components/InstagramFeed.astro";
 import { getCollection } from "astro:content";
 
 const articles = (await getCollection("articles"))
-  .filter((a) => !a.data.draft && a.data.lang !== "de")
+  .filter((a) => !a.data.draft && a.data.lang === "de")
   .sort((a, b) => +new Date(b.data.publishDate) - +new Date(a.data.publishDate))
   .slice(0, 3);
 ---
-<BaseLayout title="Chris Natterer — Systems Thinker & Builder" lang="en" altUrl="/de/">
+<BaseLayout
+  title="Chris Natterer — Systemdenker & Builder"
+  description="Ich durchschaue Systeme, damit du es nicht musst. KI-Tools, Produktivität, internationales Leben und Business-Abläufe, einfach erklärt."
+  lang="de"
+  altUrl="/"
+>
   <!-- Hero -->
   <section class="min-h-[85vh] flex items-center pt-20">
     <div class="max-w-5xl mx-auto px-6 py-20">
       <p class="font-mono text-orange text-sm tracking-wider uppercase mb-6 fade-in">Chris Natterer</p>
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-off-white leading-[1.1] mb-6 fade-in fade-in-delay-1">
-        I figure out systems<br />
-        <span class="accent-underline">so you don't have to.</span>
+        Ich durchschaue Systeme,<br />
+        <span class="accent-underline">damit du es nicht musst.</span>
       </h1>
       <p class="text-lg sm:text-xl text-light-stone max-w-2xl mb-10 leading-relaxed fade-in fade-in-delay-2">
-        AI tools. Productivity systems. International life. Business operations.<br />
-        I go deep, filter the noise, and share what actually works.
+        KI-Tools. Produktivitätssysteme. Internationales Leben. Business-Abläufe.<br />
+        Ich gehe in die Tiefe, filtere das Rauschen, und teile, was wirklich funktioniert.
       </p>
       <div class="flex flex-wrap gap-4 fade-in fade-in-delay-3">
         <a href="#newsletter" class="inline-flex items-center gap-2 bg-orange hover:bg-orange-bright text-off-white font-semibold px-6 py-3 rounded-md transition-colors">
-          Get the newsletter
+          Newsletter holen
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
         </a>
-        <a href="/artikel" class="inline-flex items-center gap-2 border border-border hover:border-stone/40 text-light-stone px-6 py-3 rounded-md transition-colors">
-          Read the articles
+        <a href="/de/artikel" class="inline-flex items-center gap-2 border border-border hover:border-stone/40 text-light-stone px-6 py-3 rounded-md transition-colors">
+          Artikel lesen
         </a>
       </div>
     </div>
   </section>
 
-  <!-- About -->
+  <!-- Über mich -->
   <section id="about" class="py-24">
     <div class="max-w-5xl mx-auto px-6">
       <div class="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
@@ -43,30 +48,30 @@ const articles = (await getCollection("articles"))
               <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
             </div>
           </div>
-          <div class="absolute -bottom-3 -right-3 bg-orange text-off-white font-mono text-xs px-3 py-1.5 rounded">systems thinker</div>
+          <div class="absolute -bottom-3 -right-3 bg-orange text-off-white font-mono text-xs px-3 py-1.5 rounded">Systemdenker</div>
         </div>
 
         <div>
-          <h2 class="font-mono text-orange text-sm tracking-wider uppercase mb-4">About</h2>
-          <h3 class="text-2xl sm:text-3xl font-bold text-off-white mb-6">The short version</h3>
+          <h2 class="font-mono text-orange text-sm tracking-wider uppercase mb-4">Über mich</h2>
+          <h3 class="text-2xl sm:text-3xl font-bold text-off-white mb-6">Die Kurzfassung</h3>
           <div class="space-y-4 text-light-stone leading-relaxed">
-            <p>I'm a systems thinker who adopts things early, maps how they actually work, and explains them to people who don't have time to figure it out themselves.</p>
-            <p>I've lived on three continents, built businesses across borders, and spent the last decade going deep on everything from AI workflows to personal finance to international tax strategy.</p>
-            <p>I'm not a guru selling a lifestyle. I'm the person who's already tested it, filtered out the noise, and can save you the learning curve.</p>
+            <p>Ich bin ein Systemdenker. Ich greife Dinge früh auf, durchschaue, wie sie wirklich funktionieren, und erkläre sie Leuten, die keine Zeit haben, sich selbst durchzuarbeiten.</p>
+            <p>Ich habe auf drei Kontinenten gelebt, Geschäfte über Grenzen hinweg aufgebaut und das letzte Jahrzehnt damit verbracht, tief in alles einzutauchen, von KI-Workflows über persönliche Finanzen bis zu internationaler Steuerstrategie.</p>
+            <p>Ich bin kein Guru, der einen Lifestyle verkauft. Ich bin der, der es schon getestet hat, das Rauschen rausgefiltert hat und dir die Lernkurve abnimmt.</p>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-8">
             <div class="bg-charcoal border border-border rounded-md p-4">
-              <p class="text-orange font-mono text-sm mb-1">Based in</p>
-              <p class="text-off-white font-medium">Tbilisi, Georgia</p>
+              <p class="text-orange font-mono text-sm mb-1">Aktuell in</p>
+              <p class="text-off-white font-medium">Tiflis, Georgien</p>
             </div>
             <div class="bg-charcoal border border-border rounded-md p-4">
-              <p class="text-orange font-mono text-sm mb-1">Continents</p>
-              <p class="text-off-white font-medium">3 and counting</p>
+              <p class="text-orange font-mono text-sm mb-1">Kontinente</p>
+              <p class="text-off-white font-medium">3 und es werden mehr</p>
             </div>
             <div class="bg-charcoal border border-border rounded-md p-4">
               <p class="text-orange font-mono text-sm mb-1">BJJ</p>
-              <p class="text-off-white font-medium">Brown belt</p>
+              <p class="text-off-white font-medium">Brauner Gürtel</p>
             </div>
           </div>
         </div>
@@ -74,51 +79,51 @@ const articles = (await getCollection("articles"))
     </div>
   </section>
 
-  <!-- What I write about -->
+  <!-- Worüber ich schreibe -->
   <section class="py-24 border-t border-border">
     <div class="max-w-5xl mx-auto px-6">
-      <h2 class="font-mono text-orange text-sm tracking-wider uppercase mb-4">What I write about</h2>
-      <h3 class="text-2xl sm:text-3xl font-bold text-off-white mb-12">Topics I go deep on</h3>
+      <h2 class="font-mono text-orange text-sm tracking-wider uppercase mb-4">Worüber ich schreibe</h2>
+      <h3 class="text-2xl sm:text-3xl font-bold text-off-white mb-12">Themen, in die ich tief eintauche</h3>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="bg-charcoal border border-border rounded-lg p-6 hover:border-orange/30 transition-colors group">
           <div class="w-10 h-10 rounded-md bg-orange-glow flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
           </div>
-          <h4 class="text-off-white font-semibold text-lg mb-2">AI & Tools</h4>
-          <p class="text-stone text-sm leading-relaxed">How to actually use AI and modern tools effectively. Prompting strategies, real workflows, honest assessments.</p>
+          <h4 class="text-off-white font-semibold text-lg mb-2">KI & Tools</h4>
+          <p class="text-stone text-sm leading-relaxed">Wie man KI und moderne Tools wirklich effektiv einsetzt. Prompting-Strategien, echte Workflows, ehrliche Einschätzungen.</p>
         </div>
 
         <div class="bg-charcoal border border-border rounded-lg p-6 hover:border-orange/30 transition-colors group">
           <div class="w-10 h-10 rounded-md bg-orange-glow flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
           </div>
-          <h4 class="text-off-white font-semibold text-lg mb-2">Productivity Systems</h4>
-          <p class="text-stone text-sm leading-relaxed">Workflows, tools, and setups that reduce friction. Systems that stick, not just look good in screenshots.</p>
+          <h4 class="text-off-white font-semibold text-lg mb-2">Produktivitätssysteme</h4>
+          <p class="text-stone text-sm leading-relaxed">Workflows, Tools und Setups, die Reibung rausnehmen. Systeme, die hängen bleiben, nicht nur auf Screenshots gut aussehen.</p>
         </div>
 
         <div class="bg-charcoal border border-border rounded-lg p-6 hover:border-orange/30 transition-colors group">
           <div class="w-10 h-10 rounded-md bg-orange-glow flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </div>
-          <h4 class="text-off-white font-semibold text-lg mb-2">International Life</h4>
-          <p class="text-stone text-sm leading-relaxed">Building a life and business across borders. Banking, taxes, residency, and the practical logistics nobody talks about.</p>
+          <h4 class="text-off-white font-semibold text-lg mb-2">Internationales Leben</h4>
+          <p class="text-stone text-sm leading-relaxed">Ein Leben und Geschäft über Grenzen hinweg aufbauen. Banking, Steuern, Aufenthalt und die praktische Logistik, über die niemand spricht.</p>
         </div>
 
         <div class="bg-charcoal border border-border rounded-lg p-6 hover:border-orange/30 transition-colors group">
           <div class="w-10 h-10 rounded-md bg-orange-glow flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
           </div>
-          <h4 class="text-off-white font-semibold text-lg mb-2">Simple Finance</h4>
-          <p class="text-stone text-sm leading-relaxed">Personal finance and investing without the complexity. Index funds, international banking, avoiding common mistakes.</p>
+          <h4 class="text-off-white font-semibold text-lg mb-2">Einfache Finanzen</h4>
+          <p class="text-stone text-sm leading-relaxed">Persönliche Finanzen und Investieren ohne den Ballast. Index-Fonds, internationales Banking, typische Fehler vermeiden.</p>
         </div>
 
         <div class="bg-charcoal border border-border rounded-lg p-6 hover:border-orange/30 transition-colors group">
           <div class="w-10 h-10 rounded-md bg-orange-glow flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </div>
-          <h4 class="text-off-white font-semibold text-lg mb-2">Business Operations</h4>
-          <p class="text-stone text-sm leading-relaxed">Using systems to run businesses efficiently. AI in business, automation, and processes that scale without headcount.</p>
+          <h4 class="text-off-white font-semibold text-lg mb-2">Business-Abläufe</h4>
+          <p class="text-stone text-sm leading-relaxed">Mit Systemen ein Geschäft effizient führen. KI im Business, Automatisierung und Prozesse, die ohne mehr Personal skalieren.</p>
         </div>
       </div>
     </div>
@@ -129,10 +134,10 @@ const articles = (await getCollection("articles"))
       <div class="max-w-5xl mx-auto px-6">
         <div class="flex items-end justify-between mb-12">
           <div>
-            <h2 class="font-mono text-orange text-sm tracking-wider uppercase mb-4">Writing</h2>
-            <h3 class="text-2xl sm:text-3xl font-bold text-off-white">Latest articles</h3>
+            <h2 class="font-mono text-orange text-sm tracking-wider uppercase mb-4">Artikel</h2>
+            <h3 class="text-2xl sm:text-3xl font-bold text-off-white">Zuletzt geschrieben</h3>
           </div>
-          <a href="/artikel" class="text-stone hover:text-orange transition-colors text-sm whitespace-nowrap">All &rarr;</a>
+          <a href="/de/artikel" class="text-stone hover:text-orange transition-colors text-sm whitespace-nowrap">Alle &rarr;</a>
         </div>
         <div class="grid md:grid-cols-3 gap-6">
           {articles.map((a) => (
@@ -152,11 +157,11 @@ const articles = (await getCollection("articles"))
     </section>
   )}
 
-  <!-- Projects -->
+  <!-- Projekte -->
   <section id="projects" class="py-24 border-t border-border">
     <div class="max-w-5xl mx-auto px-6">
-      <h2 class="font-mono text-orange text-sm tracking-wider uppercase mb-4">Active projects</h2>
-      <h3 class="text-2xl sm:text-3xl font-bold text-off-white mb-12">What I'm building</h3>
+      <h2 class="font-mono text-orange text-sm tracking-wider uppercase mb-4">Aktuelle Projekte</h2>
+      <h3 class="text-2xl sm:text-3xl font-bold text-off-white mb-12">Woran ich baue</h3>
 
       <div class="grid md:grid-cols-2 gap-6">
         <a href="https://globalizationguide.com" target="_blank" rel="noopener" class="group bg-charcoal border border-border rounded-lg p-8 hover:border-orange/30 transition-all">
@@ -167,10 +172,10 @@ const articles = (await getCollection("articles"))
             </div>
             <svg class="w-5 h-5 text-stone group-hover:text-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           </div>
-          <p class="text-stone leading-relaxed">US LLC formation, EIN applications, and Form 5472 compliance for international founders. Helping non-residents navigate American business structure.</p>
+          <p class="text-stone leading-relaxed">US-LLC-Gründung, EIN-Anträge und Form-5472-Compliance für internationale Gründer. Hilft Nicht-Ansässigen, sich in der amerikanischen Unternehmensstruktur zurechtzufinden.</p>
           <div class="flex gap-2 mt-4">
-            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">LLC formation</span>
-            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">Tax compliance</span>
+            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">LLC-Gründung</span>
+            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">Steuer-Compliance</span>
             <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">EIN</span>
           </div>
         </a>
@@ -178,31 +183,31 @@ const articles = (await getCollection("articles"))
         <a href="/apartment" class="group bg-charcoal border border-border rounded-lg p-8 hover:border-orange/30 transition-all">
           <div class="flex items-start justify-between mb-4">
             <div>
-              <h4 class="text-off-white font-semibold text-xl mb-1 group-hover:text-orange transition-colors">Tbilisi Apartment</h4>
-              <p class="text-orange font-mono text-xs">Duplex for rent — Vera District</p>
+              <h4 class="text-off-white font-semibold text-xl mb-1 group-hover:text-orange transition-colors">Apartment in Tiflis</h4>
+              <p class="text-orange font-mono text-xs">Duplex zu vermieten — Vera-Viertel</p>
             </div>
             <svg class="w-5 h-5 text-stone group-hover:text-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           </div>
-          <p class="text-stone leading-relaxed">200 m² duplex on Kostava Street. 3 bedrooms, office with standing desks, private terrace, smart home. Fully furnished and move-in ready.</p>
+          <p class="text-stone leading-relaxed">200 m² Duplex in der Kostava-Straße. 3 Schlafzimmer, Büro mit Stehpulten, private Terrasse, Smart Home. Voll möbliert und bezugsfertig.</p>
           <div class="flex gap-2 mt-4">
-            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">Vera District</span>
-            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">Smart home</span>
-            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">$1,250/mo</span>
+            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">Vera-Viertel</span>
+            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">Smart Home</span>
+            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">1.250 $/Monat</span>
           </div>
         </a>
 
         <a href="#" class="group bg-charcoal border border-border rounded-lg p-8 hover:border-orange/30 transition-all relative overflow-hidden">
           <div class="absolute top-4 right-4">
-            <span class="text-xs font-mono bg-orange/20 text-orange px-2 py-1 rounded">Coming soon</span>
+            <span class="text-xs font-mono bg-orange/20 text-orange px-2 py-1 rounded">Bald</span>
           </div>
           <div class="mb-4">
-            <h4 class="text-off-white font-semibold text-xl mb-1">YouTube Channel</h4>
-            <p class="text-orange font-mono text-xs">Systems-focused content</p>
+            <h4 class="text-off-white font-semibold text-xl mb-1">YouTube-Kanal</h4>
+            <p class="text-orange font-mono text-xs">Content rund um Systeme</p>
           </div>
-          <p class="text-stone leading-relaxed">Educational content on AI tools, productivity systems, and building an international life. Deep dives and honest assessments, no hype.</p>
+          <p class="text-stone leading-relaxed">Lerninhalte zu KI-Tools, Produktivitätssystemen und dem Aufbau eines internationalen Lebens. Tiefgang und ehrliche Einschätzungen, kein Hype.</p>
           <div class="flex gap-2 mt-4">
-            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">AI tutorials</span>
-            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">Productivity</span>
+            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">KI-Tutorials</span>
+            <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">Produktivität</span>
             <span class="text-xs font-mono bg-orange-glow text-orange px-2 py-1 rounded">International</span>
           </div>
         </a>
@@ -210,20 +215,20 @@ const articles = (await getCollection("articles"))
     </div>
   </section>
 
-  <InstagramFeed />
+  <InstagramFeed lang="de" />
 
   <!-- Newsletter -->
   <section id="newsletter" class="py-24 border-t border-border">
     <div class="max-w-2xl mx-auto px-6 text-center">
       <h2 class="font-mono text-orange text-sm tracking-wider uppercase mb-4">Newsletter</h2>
-      <h3 class="text-2xl sm:text-3xl font-bold text-off-white mb-4">Get the signal, skip the noise</h3>
-      <p class="text-light-stone mb-8 leading-relaxed">I share what I'm learning about AI, productivity, and international life. Practical stuff. No spam, no fluff, unsubscribe anytime.</p>
+      <h3 class="text-2xl sm:text-3xl font-bold text-off-white mb-4">Das Signal, ohne das Rauschen</h3>
+      <p class="text-light-stone mb-8 leading-relaxed">Ich teile, was ich über KI, Produktivität und internationales Leben lerne. Praktisches Zeug. Kein Spam, kein Füllmaterial, jederzeit abbestellbar.</p>
 
       <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="event.preventDefault(); document.getElementById('form-message').classList.remove('hidden');">
-        <input type="email" placeholder="your@email.com" required class="flex-1 bg-charcoal border border-border rounded-md px-4 py-3 text-off-white placeholder:text-stone/50 focus:outline-none focus:border-orange transition-colors" />
-        <button type="submit" class="bg-orange hover:bg-orange-bright text-off-white font-semibold px-6 py-3 rounded-md transition-colors whitespace-nowrap">Subscribe</button>
+        <input type="email" placeholder="deine@email.com" required class="flex-1 bg-charcoal border border-border rounded-md px-4 py-3 text-off-white placeholder:text-stone/50 focus:outline-none focus:border-orange transition-colors" />
+        <button type="submit" class="bg-orange hover:bg-orange-bright text-off-white font-semibold px-6 py-3 rounded-md transition-colors whitespace-nowrap">Abonnieren</button>
       </form>
-      <p id="form-message" class="hidden text-orange text-sm mt-4">Newsletter coming soon. Thanks for your interest!</p>
+      <p id="form-message" class="hidden text-orange text-sm mt-4">Newsletter kommt bald. Danke für dein Interesse!</p>
     </div>
   </section>
 </BaseLayout>

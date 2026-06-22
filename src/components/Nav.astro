@@ -1,15 +1,34 @@
 ---
-// Site nav. Section links point at the homepage (/#anchor) so they also work
-// from article pages, not just the homepage.
+// Bilingual site nav. `lang` selects labels + link targets; `altUrl` is the
+// equivalent page in the other language for the switcher (carries ?lang= so the
+// edge middleware persists the choice in the cn_locale cookie).
+interface Props {
+  lang?: "en" | "de";
+  altUrl?: string;
+}
+const { lang = "en", altUrl } = Astro.props;
+const de = lang === "de";
+const home = de ? "/de/" : "/";
+
+const t = de
+  ? { about: "Über mich", articles: "Artikel", projects: "Projekte", subscribe: "Abonnieren" }
+  : { about: "About", articles: "Articles", projects: "Projects", subscribe: "Subscribe" };
+
+const articlesHref = de ? "/de/artikel" : "/artikel";
+// switcher: from EN → German equivalent (default /de/); from DE → English (default /)
+const switchHref = de ? `${altUrl ?? "/"}?lang=en` : `${altUrl ?? "/de/"}?lang=de`;
+const switchLabel = de ? "EN" : "DE";
+const switchAria = de ? "Switch to English" : "Auf Deutsch wechseln";
 ---
 <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-border/50">
   <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="/" class="font-mono font-bold text-off-white tracking-wide text-lg">CN</a>
-    <div class="flex items-center gap-6 sm:gap-8">
-      <a href="/#about" class="text-sm text-stone hover:text-off-white transition-colors">About</a>
-      <a href="/artikel" class="text-sm text-stone hover:text-off-white transition-colors">Artikel</a>
-      <a href="/#projects" class="hidden sm:inline text-sm text-stone hover:text-off-white transition-colors">Projects</a>
-      <a href="/#newsletter" class="text-sm text-orange hover:text-orange-bright transition-colors font-medium">Subscribe</a>
+    <a href={home} class="font-mono font-bold text-off-white tracking-wide text-lg">CN</a>
+    <div class="flex items-center gap-5 sm:gap-7">
+      <a href={`${home}#about`} class="text-sm text-stone hover:text-off-white transition-colors">{t.about}</a>
+      <a href={articlesHref} class="text-sm text-stone hover:text-off-white transition-colors">{t.articles}</a>
+      <a href={`${home}#projects`} class="hidden sm:inline text-sm text-stone hover:text-off-white transition-colors">{t.projects}</a>
+      <a href={`${home}#newsletter`} class="text-sm text-orange hover:text-orange-bright transition-colors font-medium">{t.subscribe}</a>
+      <a href={switchHref} rel="nofollow" aria-label={switchAria} class="text-xs font-mono text-stone hover:text-off-white border border-border hover:border-stone/40 rounded px-2 py-1 transition-colors">{switchLabel}</a>
     </div>
   </div>
 </nav>
