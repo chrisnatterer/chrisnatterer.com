@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import { getAlternates, abs, SITE_URL } from "../config/hreflang";
 
 interface Props {
   title: string;
@@ -26,9 +27,20 @@ const {
   noindex = false,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const altHref = altUrl ? new URL(altUrl, Astro.site).href : null;
+const canonical = abs(Astro.url.pathname, SITE_URL);
 const otherLang = lang === "de" ? "en" : "de";
+
+// hreflang: the central registry owns structural pages (home, listings) and
+// returns the complete reciprocal set. Pages not in a group (articles) fall back
+// to a set built from their `altUrl` frontmatter. Pages with neither emit none.
+const altFallback = altUrl
+  ? [
+      { hreflang: lang, href: canonical },
+      { hreflang: otherLang, href: abs(altUrl, SITE_URL) },
+      { hreflang: "x-default", href: lang === "en" ? canonical : abs(altUrl, SITE_URL) },
+    ]
+  : undefined;
+const finalAlternates = getAlternates(Astro.url.pathname, SITE_URL) ?? altFallback;
 ---
 <!DOCTYPE html>
 <html lang={lang} class="scroll-smooth">
@@ -44,9 +56,9 @@ const otherLang = lang === "de" ? "en" : "de";
   <meta property="og:url" content={canonical} />
   {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site).href} />}
   {noindex && <meta name="robots" content="noindex" />}
-  {altHref && <link rel="alternate" hreflang={lang} href={canonical} />}
-  {altHref && <link rel="alternate" hreflang={otherLang} href={altHref} />}
-  {altHref && <link rel="alternate" hreflang="x-default" href={lang === "en" ? canonical : altHref} />}
+  {finalAlternates && finalAlternates.map((alt) => (
+    <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+  ))}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
